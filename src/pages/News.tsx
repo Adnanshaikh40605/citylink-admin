@@ -13,6 +13,7 @@ import {
   fromLocalInput,
   toLocalInput,
 } from '../components/ui';
+import { ImageField } from '../components/ImageField';
 
 type FormState = {
   id?: string;
@@ -269,16 +270,11 @@ export function NewsPage() {
                   }
                 />
               </label>
-              <label className="full">
-                Thumbnail URL
-                <input
-                  type="url"
-                  value={form.thumbnail}
-                  onChange={(e) =>
-                    setForm({ ...form, thumbnail: e.target.value })
-                  }
-                />
-              </label>
+              <ImageField
+                label="Thumbnail"
+                value={form.thumbnail}
+                onChange={(thumbnail) => setForm({ ...form, thumbnail })}
+              />
               <label>
                 Publication date
                 <input

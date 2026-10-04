@@ -11,6 +11,7 @@ import {
   StatusBadge,
   Toast,
 } from '../components/ui';
+import { ImageField } from '../components/ImageField';
 
 type FormState = {
   matchId: string;
@@ -226,17 +227,11 @@ export function PhotosPage() {
                   ))}
                 </select>
               </label>
-              <label className="full">
-                Image URL
-                <input
-                  type="url"
-                  required
-                  value={form.imageUrl}
-                  onChange={(e) =>
-                    setForm({ ...form, imageUrl: e.target.value })
-                  }
-                />
-              </label>
+              <ImageField
+                label="Photo"
+                value={form.imageUrl}
+                onChange={(imageUrl) => setForm({ ...form, imageUrl })}
+              />
               <label className="full">
                 Caption
                 <input
