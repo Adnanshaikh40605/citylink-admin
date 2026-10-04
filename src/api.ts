@@ -1,10 +1,13 @@
 const TOKEN_KEY = 'citylink_admin_token';
 
+const PRODUCTION_API = 'https://city-link-production.up.railway.app';
+
 export function getApiBase() {
   const fromEnv = import.meta.env.VITE_API_BASE_URL as string | undefined;
   if (fromEnv && fromEnv.trim()) return fromEnv.replace(/\/$/, '');
-  // Dev proxy in vite.config.ts
-  return '/api';
+  // Local Vite proxy only. Production builds (Vercel) must call Railway.
+  if (import.meta.env.DEV) return '/api';
+  return PRODUCTION_API;
 }
 
 export function getToken() {
