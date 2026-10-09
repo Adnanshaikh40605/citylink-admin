@@ -322,7 +322,7 @@ export function VideosPage() {
                 <label className="full">
                   YouTube Video ID or URL
                   <input
-                    placeholder="https://youtu.be/… or 11-character ID"
+                    placeholder="https://youtu.be/... or 11-character ID"
                     value={form.youtubeVideoId}
                     onChange={(e) => setForm({ ...form, youtubeVideoId: e.target.value })}
                   />
@@ -337,7 +337,7 @@ export function VideosPage() {
                   />
                   <span className="muted">
                     {uploading
-                      ? 'Uploading…'
+                      ? 'Uploading...'
                       : form.videoFileUrl || 'No file uploaded yet.'}
                   </span>
                 </label>
@@ -395,7 +395,7 @@ export function VideosPage() {
                 Cancel
               </button>
               <button className="btn" type="submit" disabled={busy}>
-                {busy ? 'Saving…' : form.published ? 'Publish' : 'Save draft'}
+                {busy ? 'Saving...' : form.published ? 'Publish' : 'Save draft'}
               </button>
             </div>
           </form>

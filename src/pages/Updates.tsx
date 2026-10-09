@@ -97,7 +97,7 @@ export function UpdatesPage() {
         </div>
         <div className="modal-actions">
           <button className="btn" type="submit" disabled={busy}>
-            {busy ? 'Sending…' : 'Send / Publish'}
+            {busy ? 'Sending...' : 'Send / Publish'}
           </button>
         </div>
       </form>
