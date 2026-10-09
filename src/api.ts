@@ -77,6 +77,10 @@ export type AdminUser = {
   phone?: string;
   profileImage?: string | null;
   role: 'USER' | 'ADMIN';
+  username?: string | null;
+  nickname?: string | null;
+  followers?: number;
+  following?: number;
   status: string;
   createdAt: string;
   watchHistoryCount?: number;
@@ -113,7 +117,9 @@ export type Match = {
   thumbnail: string;
   description: string;
   status: string;
+  videoSource?: 'YOUTUBE' | 'UPLOAD';
   youtubeVideoId: string | null;
+  videoFileUrl?: string | null;
   featured: boolean;
   published: boolean;
   photoCount?: number;
@@ -139,6 +145,31 @@ export type NewsItem = {
   publishedAt: string;
   featured: boolean;
   published: boolean;
+};
+
+export type ShowItem = {
+  id: string;
+  title: string;
+  description: string;
+  category: 'EVENTS' | 'PODCAST' | 'FILMS' | 'EDUCATION';
+  videoSource: 'YOUTUBE' | 'UPLOAD';
+  youtubeVideoId: string | null;
+  videoFileUrl: string | null;
+  thumbnail: string;
+  duration: string;
+  views: number;
+  featured: boolean;
+  published: boolean;
+  publishedAt: string;
+};
+
+export type BroadcastItem = {
+  id: string;
+  title: string;
+  message: string;
+  published: boolean;
+  publishedAt: string;
+  pushStatus: string;
 };
 
 export type DashboardTotals = {

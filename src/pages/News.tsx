@@ -262,7 +262,7 @@ export function NewsPage() {
                 />
               </label>
               <label className="full">
-                YouTube Video ID
+                YouTube Video ID or URL (leave empty for image-only news)
                 <input
                   value={form.youtubeVideoId}
                   onChange={(e) =>

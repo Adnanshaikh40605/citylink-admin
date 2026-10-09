@@ -25,7 +25,9 @@ type FormState = {
   thumbnail: string;
   description: string;
   status: 'UPCOMING' | 'LIVE' | 'COMPLETED';
+  videoSource: 'YOUTUBE' | 'UPLOAD';
   youtubeVideoId: string;
+  videoFileUrl: string;
   featured: boolean;
   published: boolean;
 };
@@ -39,7 +41,9 @@ const emptyForm = (tournamentId = ''): FormState => ({
   thumbnail: '',
   description: '',
   status: 'UPCOMING',
+  videoSource: 'YOUTUBE',
   youtubeVideoId: '',
+  videoFileUrl: '',
   featured: false,
   published: true,
 });
@@ -112,7 +116,9 @@ export function MatchesPage() {
       thumbnail: item.thumbnail,
       description: item.description,
       status: item.status.toUpperCase() as FormState['status'],
+      videoSource: item.videoSource ?? 'YOUTUBE',
       youtubeVideoId: item.youtubeVideoId ?? '',
+      videoFileUrl: item.videoFileUrl ?? '',
       featured: item.featured,
       published: item.published,
     });
@@ -132,7 +138,11 @@ export function MatchesPage() {
         thumbnail: form.thumbnail,
         description: form.description,
         status: form.status,
-        youtubeVideoId: form.youtubeVideoId.trim() || null,
+        videoSource: form.videoSource,
+        youtubeVideoId:
+          form.videoSource === 'YOUTUBE' ? form.youtubeVideoId.trim() || null : null,
+        videoFileUrl:
+          form.videoSource === 'UPLOAD' ? form.videoFileUrl.trim() || null : null,
         featured: form.featured,
         published: form.published,
       };
@@ -388,16 +398,44 @@ export function MatchesPage() {
                   onChange={(e) => setForm({ ...form, venue: e.target.value })}
                 />
               </label>
-              <label className="full">
-                YouTube Video ID
-                <input
-                  placeholder="e.g. xD_URGjp5KE"
-                  value={form.youtubeVideoId}
+              <label>
+                Video source
+                <select
+                  value={form.videoSource}
                   onChange={(e) =>
-                    setForm({ ...form, youtubeVideoId: e.target.value })
+                    setForm({
+                      ...form,
+                      videoSource: e.target.value as FormState['videoSource'],
+                    })
                   }
-                />
+                >
+                  <option value="YOUTUBE">YouTube ID or URL</option>
+                  <option value="UPLOAD">Uploaded video URL</option>
+                </select>
               </label>
+              {form.videoSource === 'YOUTUBE' ? (
+                <label>
+                  YouTube Video ID or URL
+                  <input
+                    placeholder="https://youtu.be/… or 11-character ID"
+                    value={form.youtubeVideoId}
+                    onChange={(e) =>
+                      setForm({ ...form, youtubeVideoId: e.target.value })
+                    }
+                  />
+                </label>
+              ) : (
+                <label>
+                  Uploaded video URL
+                  <input
+                    placeholder="https://…/match.mp4"
+                    value={form.videoFileUrl}
+                    onChange={(e) =>
+                      setForm({ ...form, videoFileUrl: e.target.value })
+                    }
+                  />
+                </label>
+              )}
               <ImageField
                 label="Thumbnail"
                 value={form.thumbnail}

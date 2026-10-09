@@ -9,7 +9,9 @@ import { NewsPage } from './pages/News';
 import { PhotosPage } from './pages/Photos';
 import { SettingsPage } from './pages/Settings';
 import { TournamentsPage } from './pages/Tournaments';
+import { UpdatesPage } from './pages/Updates';
 import { UsersPage } from './pages/Users';
+import { VideosPage } from './pages/Videos';
 
 function Protected({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -36,6 +38,8 @@ export default function App() {
           <Route path="matches" element={<MatchesPage />} />
           <Route path="photos" element={<PhotosPage />} />
           <Route path="news" element={<NewsPage />} />
+          <Route path="videos" element={<VideosPage />} />
+          <Route path="updates" element={<UpdatesPage />} />
           <Route path="users" element={<UsersPage />} />
           <Route path="settings" element={<SettingsPage />} />
         </Route>

@@ -100,6 +100,8 @@ export function UsersPage() {
             <thead>
               <tr>
                 <th>User</th>
+                <th>Username</th>
+                <th>Followers</th>
                 <th>Role</th>
                 <th>Status</th>
                 <th>Joined</th>
@@ -110,8 +112,14 @@ export function UsersPage() {
               {result.data.map((user) => (
                 <tr key={user.id}>
                   <td>
-                    <strong>{user.name}</strong>
+                    <strong>{user.nickname || user.name}</strong>
                     <div className="muted">{user.email}</div>
+                  </td>
+                  <td className="muted">
+                    {user.username ? `@${user.username}` : '—'}
+                  </td>
+                  <td className="muted">
+                    {user.followers ?? 0} / {user.following ?? 0}
                   </td>
                   <td>
                     {user.role === 'ADMIN' ? (

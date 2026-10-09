@@ -62,6 +62,12 @@ export function DashboardPage() {
           <Link className="btn secondary" to="/photos">
             Manage Photos
           </Link>
+          <Link className="btn" to="/updates">
+            Update Message
+          </Link>
+          <Link className="btn" to="/videos?new=1">
+            Videos & Shows
+          </Link>
         </div>
       </div>
     </>

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { useAuth } from '../auth';
 
@@ -7,15 +8,18 @@ const links = [
   { to: '/matches', label: 'Matches' },
   { to: '/photos', label: 'Photos' },
   { to: '/news', label: 'News' },
+  { to: '/videos', label: 'Videos & Shows' },
+  { to: '/updates', label: 'Update Message' },
   { to: '/users', label: 'Users' },
   { to: '/settings', label: 'Admin Settings' },
 ];
 
 export function Layout() {
   const { user, logout } = useAuth();
+  const [open, setOpen] = useState(false);
 
   return (
-    <div className="app-shell">
+    <div className={`app-shell${open ? ' nav-open' : ''}`}>
       <aside className="sidebar">
         <div className="brand">
           City Link
@@ -28,6 +32,7 @@ export function Layout() {
               to={link.to}
               end={link.end}
               className={({ isActive }) => (isActive ? 'active' : undefined)}
+              onClick={() => setOpen(false)}
             >
               {link.label}
             </NavLink>
@@ -41,7 +46,25 @@ export function Layout() {
           </button>
         </div>
       </aside>
+      {open ? (
+        <button
+          type="button"
+          className="nav-scrim"
+          aria-label="Close menu"
+          onClick={() => setOpen(false)}
+        />
+      ) : null}
       <main className="main">
+        <div className="mobile-bar">
+          <button
+            type="button"
+            className="btn secondary"
+            onClick={() => setOpen((value) => !value)}
+          >
+            Menu
+          </button>
+          <strong>City Link</strong>
+        </div>
         <Outlet />
       </main>
     </div>
